@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <spatial_aligner/DataPreparationPipeline.h>
+#include <panorama_generation/DataPreparationPipeline.h>
 
 
 void visualizeResults(const panorama_generation::feature_extraction::ExtractionResults& results)

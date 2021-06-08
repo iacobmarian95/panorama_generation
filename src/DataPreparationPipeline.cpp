@@ -1,4 +1,4 @@
-#include <spatial_aligner/DataPreparationPipeline.h>
+#include <panorama_generation/DataPreparationPipeline.h>
 #include <iostream>
 
 namespace panorama_generation::feature_extraction {
@@ -14,6 +14,18 @@ DataPreparationPipeline::DataPreparationPipeline(fs::path dataPath, size_t nJobs
 ExtractionResults DataPreparationPipeline::getResults()
 {
     return _results;
+}
+
+
+cv::Mat DataPreparationPipeline::loadImage(std::future<std::string> fileNameFuture)
+{
+    std::scoped_lock l(_semaphore);
+
+    auto fileName = fileNameFuture.get();
+
+    auto img = cv::imread(fileName);
+
+    return img;
 }
 
 
@@ -67,18 +79,6 @@ DataPreparationPipeline::SIFTDescriptorExtractor(std::future<std::pair<cv::Mat, 
     }
 
     return {img, keypoints, descriptors};
-}
-
-
-cv::Mat DataPreparationPipeline::loadImage(std::future<std::string> fileNameFuture)
-{
-    std::scoped_lock l(_semaphore);
-
-    auto fileName = fileNameFuture.get();
-
-    auto img = cv::imread(fileName);
-
-    return img;
 }
 
 
