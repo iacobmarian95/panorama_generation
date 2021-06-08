@@ -3,7 +3,7 @@
 #include <spatial_aligner/DataPreparationPipeline.h>
 
 
-void visualizeResults(const feature_extraction::ExtractionResults& results)
+void visualizeResults(const panorama_generation::feature_extraction::ExtractionResults& results)
 {
     for(auto& it : results)
     {
@@ -25,7 +25,7 @@ int main()
 
     fs::path dataPath = buildPath / "data";
 
-    auto pipeline = std::make_shared<feature_extraction::DataPreparationPipeline>(dataPath, /*nThreads*/ 8);
+    auto pipeline = std::make_shared<panorama_generation::feature_extraction::DataPreparationPipeline>(dataPath, /*nThreads*/ 8);
 
     auto start = std::chrono::system_clock::now();
     {
@@ -36,7 +36,7 @@ int main()
     
     std::cout << "Runtime ==========> " << elapsed.count() << std::endl;
 
-    feature_extraction::ExtractionResults results = pipeline->getResults();
+    panorama_generation::feature_extraction::ExtractionResults results = pipeline->getResults();
     visualizeResults(results);
 
 

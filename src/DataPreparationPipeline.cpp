@@ -1,7 +1,7 @@
 #include <spatial_aligner/DataPreparationPipeline.h>
 #include <iostream>
 
-namespace feature_extraction {
+namespace panorama_generation::feature_extraction {
 
 
 DataPreparationPipeline::DataPreparationPipeline(fs::path dataPath, size_t nJobs) 
