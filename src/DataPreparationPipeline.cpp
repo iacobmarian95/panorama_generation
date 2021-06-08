@@ -61,6 +61,8 @@ std::pair<cv::Mat, std::vector<cv::KeyPoint>> DataPreparationPipeline::SIFTfeatu
 std::tuple<cv::Mat, std::vector<cv::KeyPoint>, cv::Mat> 
 DataPreparationPipeline::SIFTDescriptorExtractor(std::future<std::pair<cv::Mat, std::vector<cv::KeyPoint>>> imgWithKeypointsFuture)
 {
+    std::scoped_lock l(_semaphore);
+
     auto imgWithKeypoints = imgWithKeypointsFuture.get();
 
     auto& img = imgWithKeypoints.first;
